@@ -1,0 +1,44 @@
+Cho hai số nguyên dương a và b (1 ≤ b ≤ a < 10^1000), hãy tính a + b, a - b, a * b, a div b, a mod b.
+
+
+Input
+Dòng 1: Chứa số a
+
+Dòng 2: Chứa số b
+
+
+Output
+Dòng 1: Ghi giá trị a + b
+
+Dòng 2: Ghi giá trị a - b
+
+Dòng 3: Ghi giá trị a * b
+
+Dòng 4: Ghi giá trị a div b
+
+Dòng 5: Ghi giá trị a mod b
+
+///////////////////////////////////////////////////////
+
+Để thực hiện các phép toán này với số nguyên lớn, chúng ta có thể sử dụng thư viện hỗ trợ xử lý số nguyên lớn trong JavaScript như BigInt. Dưới đây là một đoạn mã JavaScript để thực hiện các phép toán cần thiết:
+
+function performOperations(a, b) {
+    const sum = a + b;
+    const difference = a - b;
+    const product = a * b;
+    const division = a / b;
+    const modulus = a % b;
+
+    return [sum, difference, product, division, modulus];
+}
+
+// Đọc dữ liệu đầu vào từ stdin
+const a = BigInt('1234567890123456789012345678901234567890'); // Thay đổi giá trị của a tại đây
+const b = BigInt('987654321098765432109876543210987654321'); // Thay đổi giá trị của b tại đây
+
+const results = performOperations(a, b);
+
+// In kết quả ra stdout
+results.forEach(result => console.log(result.toString()));
+
+Bạn có thể thay đổi giá trị của a và b trong mã để kiểm tra với các giá trị khác nhau. Đoạn mã này sử dụng BigInt để xử lý các số nguyên lớn và thực hiện các phép toán cộng, trừ, nhân, chia lấy nguyên và chia lấy dư. Hãy chạy đoạn mã này trên môi trường JavaScript để kiểm tra kết quả.

@@ -1,0 +1,115 @@
+Giám đốc một công ty trách nhiệm hữu hạn muốn xin chữ ký của ông Kiến trúc sư trưởng thành phố phê duyệt dự án xây dựng trụ sở làm việc của công ty. Ông kiến trúc sư trưởng chỉ ký vào giấy phép khi bà thư ký của ông ta đã ký duyệt vào giấy phép. Bà thư ký làm việc tại tầng thứ M của toà nhà trụ sở làm việc gồm M tầng của Văn phòng Kiến trúc sư trưởng thành phố. Các tầng của toà nhà được đánh số từ 1 đến M, từ thấp đến cao. Mỗi tầng của toà nhà có N phòng được đánh số từ 1 đến N từ trái qua phải. Trong mỗi phòng chỉ có một nhân viên làm việc. Giấy phép chỉ được bà thư ký ký duyệt khi đã có ít nhất một nhân viên ở tầng M đã ký xác nhận. Ngoài bà thư ký, một nhân viên bất kỳ chỉ ký xác nhận vào giấy phép khi có ít nhất một trong các điều kiện sau được thoả mãn:
+
+a) Nhân viên đó làm việc ở tầng 1
+
+b) Giấy phép đã được ký xác nhận bởi nhân viên làm việc ở cùng số phòng trong tầng sát dưới
+
+c) Giấy phép đã được ký xác nhận bởi nhân viên làm việc ở cùng số phòng trong tầng sát trên
+
+d) Giấy phép đã được ký xác nhận bởi nhân viên làm việc ở phòng bên cạnh
+
+Mỗi một nhân viên (kể cả bà thư ký) khi ký xác nhận đều đòi một khoản lệ phí. Hãy chỉ ra cách xin được chữ ký của Kiến trúc sư trưởng đòi hỏi tổng lệ phí phải trả là nhỏ nhất (giả thiết rằng riêng chữ ký của Kiến trúc sư trưởng không mất lệ phí).
+
+
+Input
+Dòng đầu tiên chứa ba số M, N, P (1 ≤ M ≤ 50; 1 ≤ N ≤ 100; 1 ≤ P ≤ N) ở đây P là số phòng bà thư ký.
+
+Dòng thứ i trong số M dòng tiếp theo chứa N số nguyên dương theo thứ tự là lệ phí phải trả cho các nhân viên ở các phòng 1, 2, ..., N trên tầng i. Các số này không vượt quá 109và giả thiết rằng tổng chi phí cần trả cũng không vượt quá 109.
+
+
+Output
+Dòng đầu tiên ghi 2 số F, K theo thứ tự là chi phí cần trả và số lượng phòng cần đi qua.
+
+K dòng tiếp theo, mỗi dòng ghi số tầng và số phòng của một phòng theo thứ tự cần đi qua.
+
+(Các số trên 1 dòng của input/output file cách nhau ít nhất 1 dấu trống)
+
+//////////////////////////////////////
+
+Dạy code trực tiếp trên nền tảng này có thể gây khó khăn. Tuy nhiên, tôi có thể cung cấp một mẫu giải thuật để giúp bạn giải quyết bài toán này.
+
+Giải thuật:
+
+Tạo một ma trận 2 chiều để lưu trữ lệ phí của từng phòng tại từng tầng.
+Sử dụng dynamic programming để tìm lựa chọn tối ưu nhất với chi phí nhỏ nhất.
+Bắt đầu từ tầng M và phòng P (phòng của bà thư ký), duyệt ngược lên tầng 1 để xác định lựa chọn tối ưu nhất với chi phí nhỏ nhất theo yêu cầu bài toán.
+Đây là một phần mã JavaScript có thể giúp bạn bắt đầu:
+function findMinCost(M, N, P, costs) {
+    // Tạo mảng lưu trữ chi phí
+    let dp = new Array(M);
+    for (let i = 0; i < M; i++) {
+        dp[i] = new Array(N);
+    }
+
+    // Gán giá trị cho tầng cuối cùng
+    for (let j = 0; j < N; j++) {
+        dp[M - 1][j] = costs[M - 1][j];
+    }
+
+    // Duyệt ngược từ tầng M - 1 đến tầng 1
+    for (let i = M - 2; i >= 0; i--) {
+        for (let j = 0; j < N; j++) {
+            // Tìm chi phí nhỏ nhất từ các lựa chọn a, b, c, d
+            let minCost = dp[i + 1][j]; // a
+
+            if (j > 0) {
+                minCost = Math.min(minCost, dp[i + 1][j - 1]); // b
+            }
+            if (j < N - 1) {
+                minCost = Math.min(minCost, dp[i + 1][j + 1]); // c
+            }
+
+            if (i === M - 2 && j === P - 1) {
+                minCost = Math.min(minCost, 0); // Không cần phải trả lệ phí cho bà thư ký
+            } else {
+                minCost = Math.min(minCost, dp[i][j]); // d
+            }
+
+            dp[i][j] = costs[i][j] + minCost; // Cập nhật chi phí nhỏ nhất cho ô hiện tại
+        }
+    }
+
+    // Tìm chi phí nhỏ nhất tại tầng đầu tiên
+    let minCost = Math.min(...dp[0]);
+
+    // Tìm các phòng cần đi qua để đạt được chi phí nhỏ nhất
+    let path = [];
+    let minIndex = dp[0].indexOf(minCost);
+    path.push([1, minIndex + 1]); // Tầng 1 được đánh số từ 1
+
+    // Duyệt từ tầng 1 đến tầng M - 1 để xác định đường đi
+    let currIndex = minIndex;
+    for (let i = 0; i < M - 1; i++) {
+        let nextMin = Infinity;
+        let nextIndex = -1;
+
+        if (currIndex > 0 && dp[i + 1][currIndex - 1] < nextMin) {
+            nextMin = dp[i + 1][currIndex - 1];
+            nextIndex = currIndex - 1;
+        }
+        if (currIndex < N - 1 && dp[i + 1][currIndex + 1] < nextMin) {
+            nextMin = dp[i + 1][currIndex + 1];
+            nextIndex = currIndex + 1;
+        }
+        if (dp[i][currIndex] < nextMin) {
+            nextMin = dp[i][currIndex];
+            nextIndex = currIndex;
+        }
+
+        path.push([i + 2, nextIndex + 1]); // Cập nhật đường đi mới
+        currIndex = nextIndex;
+    }
+
+    return [minCost, path.length, ...path.reverse()];
+}
+
+// Đọc dữ liệu từ input và gọi hàm findMinCost
+// ... (code để đọc dữ liệu từ input)
+// const [minCost, pathLength, ...path] = findMinCost(M, N, P, costs);
+
+// In ra kết quả
+// console.log(minCost, pathLength);
+// path.forEach(p => console.log(p.join(' ')));
+
+Hàm findMinCost sẽ trả về chi phí nhỏ nhất cần trả và đường đi cần qua. Bạn cần thay đổi phần đọc dữ liệu từ input và in ra kết quả tương ứng để hoàn thành mã của mình.
+

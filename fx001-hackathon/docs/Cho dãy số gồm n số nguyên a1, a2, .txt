@@ -1,0 +1,42 @@
+Cho dãy số gồm n số nguyên a1, a2, …, an. Tìm giá trị lớn nhất của hàmf (i,j,k)= ai +2× aj +3× ak với 1 ≤ i < j < k ≤ n.Ví dụ: với dãy gồm 5 số -1, 2, -2, -3, 5 thì f (1,2,5)=-1+2×2+3×5=18 là lớn nhất.
+
+
+Input
+Dòng đầu tiên chứa số nguyên n (3 ≤ n ≤ 10^5),• Dòng thứ i trong n dòng tiếp theo chứa số nguyên ai (|ai| ≤ 10^9).
+
+
+Output
+một số nguyên – giá trị lớn nhất củahàm f (i,j,k)tìm được
+
+/////////////////////////////////////////////////////////
+
+Để tìm giá trị lớn nhất của hàm f(i,j,k)=ai + 2×aj + 3×ak với 1≤i<j<k≤n, chúng ta có thể sử dụng một thuật toán đơn giản để tìm và so sánh các giá trị của hàm này.
+
+Dưới đây là một đoạn mã JavaScript để giải bài toán này:
+
+function findMaxValue(arr) {
+    const n = arr.length;
+    let maxVal = -Infinity;
+
+    for (let i = 0; i < n - 2; i++) {
+        for (let j = i + 1; j < n - 1; j++) {
+            for (let k = j + 1; k < n; k++) {
+                const value = arr[i] + 2 * arr[j] + 3 * arr[k];
+                if (value > maxVal) {
+                    maxVal = value;
+                }
+            }
+        }
+    }
+
+    return maxVal;
+}
+
+// Đọc dữ liệu đầu vào từ stdin
+const n = 5; // Thay đổi giá trị n tại đây
+const arr = [-1, 2, -2, -3, 5]; // Thay đổi giá trị của mảng tại đây
+
+const maxValue = findMaxValue(arr);
+console.log(maxValue);
+
+Bạn có thể thay đổi giá trị của n và mảng arr để kiểm tra với các trường hợp khác nhau. Đoạn mã này sẽ tìm giá trị lớn nhất của hàm f(i,j,k) và in kết quả ra màn hình. Hãy chạy đoạn mã trên môi trường JavaScript để kiểm tra kết quả.

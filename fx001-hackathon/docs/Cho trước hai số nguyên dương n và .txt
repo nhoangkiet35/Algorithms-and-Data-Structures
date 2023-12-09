@@ -1,0 +1,73 @@
+Cho trước hai số nguyên dương n và k (n ≤ 20, k ≤ 30).
+
+Yêu cầu 1: Hãy cho biết có bao nhiêu số có ≤ n chữ số mà tổng các chữ số đúng bằng k
+
+Yêu cầu 2: Cho số nguyên dương p, hỏi nếu đem các số tìm được sắp xếp theo thứ tự tăng dần thì số thứ p là số nào. (p không lớn hơn số lượng các số tìm được)
+
+
+Input
+dòng chứa ba số n, k, p theo đúng thứ tự cách nhau 1 dấu cách.
+
+
+Output
+Dòng 1: Ghi số lượng các số tìm được trong yêu cầu 1
+
+Dòng 2: Ghi số thứ p trong yêu cầu 2 tìm được.
+
+/////////////////////////////////////////////////////
+Để giải quyết yêu cầu này, ta có thể sử dụng kỹ thuật đệ quy để sinh các số có tối đa n chữ số và kiểm tra tổng các chữ số của từng số. Sau đó, ta sắp xếp các số tìm được và chọn số thứ p.
+
+Dưới đây là một phần mã JavaScript để giải quyết bài toán:
+
+// Hàm tính tổng các chữ số của một số nguyên
+function sumOfDigits(num) {
+    let sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num = Math.floor(num / 10);
+    }
+    return sum;
+}
+
+// Hàm sinh các số có tối đa n chữ số và tổng các chữ số đúng bằng k
+function generateNumbersWithSum(n, k) {
+    let result = [];
+
+    // Hàm đệ quy sinh số có tối đa n chữ số
+    function generate(current, length, sum) {
+        if (length === n) {
+            if (sumOfDigits(current) === k) {
+                result.push(current);
+            }
+            return;
+        }
+
+        for (let i = 0; i <= 9; i++) {
+            let next = current * 10 + i;
+            generate(next, length + 1, sum + i);
+        }
+    }
+
+    // Bắt đầu sinh các số
+    for (let i = 0; i <= 9; i++) {
+        generate(i, 1, i);
+    }
+
+    return result;
+}
+
+// Đọc dữ liệu từ input và gọi hàm để giải quyết yêu cầu
+// ... (code để đọc dữ liệu từ input và lấy các giá trị n, k, p)
+// const numbers = generateNumbersWithSum(n, k);
+// numbers.sort((a, b) => a - b);
+
+// const count = numbers.length;
+// const pthNumber = numbers[p - 1];
+
+// In ra kết quả
+// console.log(count);
+// console.log(pthNumber);
+
+Hàm generateNumbersWithSum sẽ sinh ra tất cả các số có tối đa n chữ số và tổng các chữ số bằng k. Sau đó, chúng ta sắp xếp mảng các số này và chọn số thứ p.
+
+Bạn cần hoàn thiện phần đọc dữ liệu từ input và in ra kết quả tương ứng để hoàn thiện mã của mình.

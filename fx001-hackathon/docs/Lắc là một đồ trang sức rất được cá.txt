@@ -1,0 +1,79 @@
+Lắc là một đồ trang sức rất được các cô gái ưa chuộng. Chính vì vậy mà chúng phải được chế tạo thật đẹp và đa dạng. Xét việc chế tạo lắc có m mắt xích, mỗi mắt được nạp một viên kim cương. Có n loại viên kim cương khác nhau, n ≤ 7; 2  ≤  m  ≤  2^(7-n)+ 19.
+
+Hai lắc được gọi là khác nhau nếu ta không thể tìm cách đặt sao cho các mắt tương ứng có kim cương cùng loại. Lưu ý rằng lắc có hình vòng.
+
+Với m và n cho trước, hãy xác định xem có thể tồn tại bao nhiêu loại lắc khác nhau.
+
+Các loại kim cương được ký hiệu là A, B, C, ... Một cấu hình lắc được xác định bởi một xâu m ký tự A, B, C, ... và bắt đầu bằng ký tự nhỏ nhất.
+
+Cho số thứ tự l, hãy xác định cấu hình tương ứng (Các cấu hình được sắp xếp theo thứ tự từ điểm).
+
+
+Input
+m n
+
+l1
+
+l2
+
+...
+
+
+Output
+K - Số lượng lắc khác nhau
+
+s1
+
+s2
+
+... (si xác định cấu hình lắc tương ứng với li)
+
+/////////////////////////////////////////////////
+Để giải bài toán này, chúng ta cần thực hiện việc sinh ra tất cả các cấu hình có thể của lắc và kiểm tra xem chúng có khác nhau không dựa trên yêu cầu đã định nghĩa. Một cách tiếp cận để giải quyết vấn đề này là sử dụng đệ quy để sinh ra các cấu hình của lắc và sau đó kiểm tra tính khác biệt giữa chúng.
+
+Dưới đây là một phần mã JavaScript có thể giúp bạn bắt đầu:
+
+function generateConfigurations(m, n) {
+    const types = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.substring(0, n).split(''); // Loại kim cương
+
+    let configurations = []; // Mảng chứa các cấu hình lắc
+
+    // Hàm đệ quy để sinh cấu hình lắc
+    function generate(current, length) {
+        if (length === m) {
+            configurations.push(current);
+            return;
+        }
+
+        for (let i = 0; i < n; i++) {
+            let next = current + types[i];
+            generate(next, length + 1);
+        }
+    }
+
+    generate('', 0);
+
+    return configurations;
+}
+
+function countUniqueConfigurations(m, n, orders) {
+    let configurations = generateConfigurations(m, n);
+    let uniqueConfigurations = new Set(configurations);
+
+    let result = [];
+    for (let i = 0; i < orders.length; i++) {
+        let index = orders[i] - 1;
+        let config = Array.from(uniqueConfigurations)[index];
+        result.push(config);
+    }
+
+    return [uniqueConfigurations.size, ...result];
+}
+
+const [K, ...results] = countUniqueConfigurations(4, 3, [2, 21]);
+console.log(K);
+results.forEach(result => console.log(result));
+
+Hàm generateConfigurations sẽ sinh ra tất cả các cấu hình có thể của lắc dựa trên số mắt xích và số loại kim cương. Sau đó, hàm countUniqueConfigurations sẽ đếm số lượng cấu hình lắc khác nhau và trả về danh sách cấu hình tương ứng với các số thứ tự đã cho.
+
+Bạn cần phần đọc dữ liệu từ input và in ra kết quả tương ứng để hoàn thiện mã của mình.

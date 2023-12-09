@@ -1,0 +1,71 @@
+Cho dãy A = (a1, a2, ..., an) là dãy các số nguyên dương đôi một khác nhau.
+
+Hãy liệt kê tất cả các cách hoán vị phần tử của dãy A thoả mãn: giữa hai giá trị M và N bất kỳ trong hoán vị đó, không tồn tại giá trị P nào để: 2P = M + N.
+
+Ví dụ: Với dãy A là (11, 22, 33, 44) thì
+
+Hoán vị (11, 44, 33, 22) là thoả mãn điều kiện trên
+
+Hoán vị (11, 44, 22, 33) không thoả mãn vì có giá trị P = 22 nằm giữa hai giá trị M = 11 và N = 33 mà:  22 * 2 = 11 + 33.
+
+
+Input
+Dòng 1: Ghi số n (2 ≤ n ≤ 11)
+
+Dòng 2: Ghi đủ giá trị n phần tử của dãy A (1 ≤ ai ≤ 100).
+
+
+Output
+Dòng cuối cùng ghi số lượng hoán vị tìm được (K)
+
+
+////////////////////////////////////////////////////////
+
+Dưới đây là một giải thuật sử dụng ngôn ngữ JavaScript để liệt kê tất cả các hoán vị của dãy A thoả mãn điều kiện đã cho:
+
+function isSatisfy(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] * 2 === arr[j] + arr[i]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function swap(arr, i, j) {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+function permute(arr, l, r) {
+    let count = 0;
+
+    if (l === r) {
+        if (isSatisfy(arr)) {
+            console.log(arr.join(' '));
+            count++;
+        }
+    } else {
+        for (let i = l; i <= r; i++) {
+            swap(arr, l, i);
+            count += permute(arr, l + 1, r);
+            swap(arr, l, i);
+        }
+    }
+    return count;
+}
+
+function countValidPermutations(n, arr) {
+    console.log(permute(arr, 0, n - 1));
+}
+
+// Đọc dữ liệu đầu vào từ stdin
+const n = 4; // Thay đổi giá trị n tại đây
+const arr = [11, 22, 33, 44]; // Thay đổi giá trị của mảng tại đây
+
+countValidPermutations(n, arr);
+
+Bạn có thể thay đổi giá trị của n và mảng arr để kiểm tra với các trường hợp khác nhau. Chạy đoạn mã này trên môi trường JavaScript để xem kết quả.
