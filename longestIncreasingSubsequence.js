@@ -1,5 +1,5 @@
-function longestIncreasingSubsequence(n, arr) {
-    // const n = arr.length;
+function longestIncreasingSubsequence(arr) {
+    const n = arr.length;
     const dp = new Array(n).fill(1);
 
     for (let i = 1; i < n; i++) {
@@ -12,8 +12,8 @@ function longestIncreasingSubsequence(n, arr) {
 
     return Math.max(...dp);
 }
-
-console.log(longestIncreasingSubsequence(6, [1, 2, 5, 4, 6, 2]));
+const result = longestIncreasingSubsequence([1, 2, 5, 4, 6, 2]);
+console.log(result);
 
 // Đọc dữ liệu đầu vào
 // const readline = require("readline");
