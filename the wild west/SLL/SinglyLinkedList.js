@@ -26,7 +26,7 @@ class SinglyLinkedList {
     // This function should take in a value and add a node to the end of the SinglyLinkedList.
     // It should return the SinglyLinkedList.
     push(val) {
-        var newNode = new Node(val);
+        let newNode = new Node(val);
         if (!this.head) {
             this.head = newNode;
             this.tail = this.head;
@@ -42,8 +42,8 @@ class SinglyLinkedList {
     // It should return the node removed.
     pop() {
         if (!this.head) return undefined;
-        var current = this.head;
-        var newTail = current;
+        let current = this.head;
+        let newTail = current;
         while (current.next) {
             newTail = current;
             current = current.next;
@@ -61,10 +61,10 @@ class SinglyLinkedList {
     // This function should find a node at a specified index in a SinglyLinkedList.
     // It should return the found node.
     get(index) {
-        if (index < 0 || index >= this.length) return null;
-        var counter = 0;
-        var current = this.head;
-        while (counter !== index) {
+        if (index < 0 || index >= this.length || !this.head) return null;
+        let counter = 0;
+        let current = this.head;
+        while (counter < index && current) {
             current = current.next;
             counter++;
         }
@@ -79,9 +79,9 @@ class SinglyLinkedList {
         if (index === this.length) return !!this.push(val);
         if (index === 0) return !!this.unshift(val);
 
-        var newNode = new Node(val);
-        var prev = this.get(index - 1);
-        var temp = prev.next;
+        let newNode = new Node(val);
+        let prev = this.get(index - 1);
+        let temp = prev.next;
         prev.next = newNode;
         newNode.next = temp;
         this.length++;
@@ -123,22 +123,36 @@ class SinglyLinkedList {
     // in the SinglyLinkedList at the index with the new value.
     // It should return true if the node is updated successfully, or false if an invalid index is passed in.
     set(index, val) {
-        var foundNode = this.get(index);
+        let foundNode = this.get(index);
         if (foundNode) {
             foundNode.val = val;
             return true;
         }
         return false;
     }
+
+    // This function should remove a node at a specified index in a SinglyLinkedList.
+    // It should return the removed node.
+    // if the index is valid, or undefined if the index is invalid.
+    remove(index) {
+        if (index < 0 || index >= this.length || !this.head) return undefined;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+        let previousNode = this.get(index - 1);
+        let removed = previousNode.next;
+        previousNode.next = removed.next;
+        this.length--;
+        return removed;
+    }
 }
 
-var singlyLinkedList = new SinglyLinkedList();
+let singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(5).push(10).push(15).push(20).push(25);
 // singlyLinkedList.head.val; // 5
 // singlyLinkedList.tail.val; // 25;
 singlyLinkedList.printList();
 
-singlyLinkedList.rotate(-2);
+// singlyLinkedList.rotate(-2);
 // singlyLinkedList.head.val; // 20
 // singlyLinkedList.head.next.val; // 25
 // singlyLinkedList.head.next.next.val; // 5
@@ -146,5 +160,9 @@ singlyLinkedList.rotate(-2);
 // singlyLinkedList.head.next.next.next.next.val; // 15
 // singlyLinkedList.tail.val; // 15
 // singlyLinkedList.tail.next; // null
+
+console.log(singlyLinkedList.remove(2).val); // Output: 15
+console.log(singlyLinkedList.remove(100)); // Output: undefined
+// console.log(singlyLinkedList.length); // Output: 4
 
 singlyLinkedList.printList();
