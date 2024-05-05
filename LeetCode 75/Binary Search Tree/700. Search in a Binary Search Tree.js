@@ -42,13 +42,13 @@ let val = 2;
 let resultNode = searchBST(root, val);
 
 // Print the subtree rooted at the node with value 2
-console.log(resultNode); // Output the node or null if not found
+console.log(resultNode); // Output the node val 2
 
 val = 5;
 resultNode = searchBST(root, val);
 
 // Print the subtree rooted at the node with value 2
-console.log(resultNode); // Output the node or null if not found
+console.log(resultNode); // Output the node not found
 
 /*
 

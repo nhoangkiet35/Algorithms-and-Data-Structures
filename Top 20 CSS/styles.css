@@ -1,0 +1,202 @@
+body {
+    background-color: lightblue;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+/* 2. What are CSS selectors,
+and what are the different types of selectors? */
+.highlight {
+    background-color: yellow;
+}
+
+#main-content {
+    width: 80%;
+    margin: auto;
+}
+
+input[type="text"] {
+    background-color: lightgray;
+}
+
+a:hover {
+    color: red;
+}
+
+p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+div>p {
+    color: blue;
+}
+
+/* 3. What is the box model in CSS? */
+.box {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+/* 4. What is the difference between block-level and inline elements in CSS? */
+.block {
+    display: block;
+    background-color: lightblue;
+}
+
+.inline {
+    display: inline;
+    background-color: lightgreen;
+}
+
+/* 5. How do you apply multiple classes to an HTML element? */
+.large-text {
+    font-size: 24px;
+}
+
+.red {
+    color: red;
+}
+
+/* 6. What is specificity in CSS,
+and how is it calculated? */
+/* Specificity: 0,0,0,1 */
+p {
+    color: blue;
+}
+
+/* Specificity: 0,0,1,0 */
+.highlight {
+    color: red;
+}
+
+/* Specificity: 0,1,0,0 */
+#main p {
+    color: green;
+}
+
+/* 7. What are the different types of CSS positioning,
+and how do they work? */
+.static {
+    position: static;
+}
+
+.relative {
+    position: relative;
+    top: 20px;
+    left: 50px;
+}
+
+.absolute {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+.fixed {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* 8. What is the difference between display: none;
+and visibility: hidden;
+? */
+.hidden1 {
+    display: none;
+}
+
+.hidden2 {
+    visibility: hidden;
+}
+
+/* 9. What is the !important rule in CSS,
+and when should you use it? */
+.highlight {
+    color: red;
+}
+
+.highlight {
+    color: blueviolet !important;
+}
+
+/* 10. What are CSS media queries,
+and how are they used for responsive design? */
+/* Default styles for all devices */
+body {
+    font-size: 16px;
+
+}
+
+/* Styles for screens with a width of 768 pixels or more */
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    .highlight {
+        background-color: red;
+    }
+}
+
+/* Styles for screens with a width of 1024 pixels or more */
+@media screen and (min-width: 1024px) {
+    body {
+        font-size: 20px;
+    }
+
+    .highlight {
+        background-color: blue;
+    }
+}
+
+/* 11. What is the difference between margin and padding in CSS? */
+.container {
+    background-color: lightgray;
+}
+
+.element {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+}
+
+/* 13. What is the difference between em and rem units in CSS? */
+html {
+    font-size: 16px;
+}
+
+.parent {
+    font-size: 20px;
+}
+
+.child {
+    font-size: 1em;
+    /* 20 pixels, based on the parent font size */
+    margin-bottom: 1rem;
+    /* 16 pixels, based on the root font size */
+}
+
+/* 14. How do you create a responsive grid layout in CSS? */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+}
+
+.grid-item {
+    background-color: lightgray;
+    padding: 20px;
+    text-align: center;
+}

@@ -1,0 +1,67 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: yellowgreen;
+    display: grid;
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-areas: "item1 item2 item2 item3"
+        "item1 item4 item5 item6"
+        "item1 item7 item8 item6";
+    gap: 10px;
+    place-self: center;
+    width: 50%;
+    height: 50%;
+}
+
+.item1 {
+    grid-area: item1;
+    background-color: green;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item2 {
+    grid-area: item2;
+    background-color: green;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item3 {
+    grid-area: item3;
+    background-color: red;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item4 {
+    grid-area: item4;
+    background-color: orange;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item5 {
+    grid-area: item5;
+    background-color: red;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item6 {
+    grid-area: item6;
+    background-color: green;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item7 {
+    grid-area: item7;
+    background-color: red;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item8 {
+    grid-area: item8;
+    background-color: orange;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
